@@ -8,6 +8,7 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private Player player = new Player();
 
     public Game1()
     {
@@ -18,13 +19,14 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-
+        
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+        player.LoadContent(Content);
 
     }
 
@@ -34,14 +36,19 @@ public class Game1 : Game
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
         
-
+        player.Update(gameTime);
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
-
+        GraphicsDevice.Clear(Color.DarkSlateGray);
+        
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        
+        player.Draw(_spriteBatch);
+        
+        _spriteBatch.End();
 
         base.Draw(gameTime);
     }

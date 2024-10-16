@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Content;
 
 namespace MiniMX;
-public class WorldGeneration
+public class WorldGeneration : Sprite
 {
     private Texture2D tileSet;
     private int tileWidth = 16;
@@ -22,7 +22,6 @@ public class WorldGeneration
         tileSet = Content.Load<Texture2D>(fileName);
         
         int tileIndex = 0;
-        Console.WriteLine(tileSet);
         for (int y = 0; y != tileSet.Height; y += tileHeight)
         {
             for (int x = 0; x != tileSet.Width; x += tileWidth)

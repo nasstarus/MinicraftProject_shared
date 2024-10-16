@@ -6,13 +6,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MiniMX;
 
-public class Player
+public class Player : Sprite
 {
-    private int scale = 10;
-    private int speed = 5;
-    private float rotation = 0;
-    private Texture2D texture;
-    private Vector2 position = Vector2.Zero;
+    public int scale = 10;
+    public int speed = 5;
+    public float rotation = 0;
+    public Texture2D texture;
+    public Vector2 position = Vector2.Zero;
     public Vector2 trueSize
     {
         get { return new Vector2(texture.Width*scale, texture.Height*scale); }
@@ -24,7 +24,7 @@ public class Player
         texture = Content.Load<Texture2D>("player");
     }
 
-    public void Update(GameTime gameTime)
+    public override void Update(GameTime gameTime)
     {
         Vector2 movement = Vector2.Zero;
         
@@ -57,10 +57,10 @@ public class Player
 
     private SpriteEffects flipSprite = SpriteEffects.None;
 
-    public void Draw(SpriteBatch _spriteBatch)
+    public void Draw(SpriteBatch _spriteBatch, GraphicsDeviceManager graphicsDevice)
     {
         _spriteBatch.Draw(texture,
-            position,
+            new Vector2(graphicsDevice.PreferredBackBufferWidth / 2 - trueSize.X / 2, graphicsDevice.PreferredBackBufferHeight / 2 - trueSize.Y / 2) , 
             null,
             Color.White,
             rotation,

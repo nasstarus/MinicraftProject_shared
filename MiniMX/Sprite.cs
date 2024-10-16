@@ -14,4 +14,13 @@ public class Sprite
     public Vector2 scale = Vector2.One;
     public SpriteEffects SpriteEffects = SpriteEffects.None;
     public float layer = 0f;
+
+    public Sprite(Texture2D? texture = null, Vector2? position = null)
+    {
+        this.texture = texture;
+        this.position = position ?? Vector2.Zero;
+    }
+    
+    public virtual void Update(GameTime gameTime)
+    {}
 }

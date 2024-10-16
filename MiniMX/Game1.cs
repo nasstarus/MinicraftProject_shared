@@ -8,6 +8,7 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private WorldGeneration worldGeneration = new WorldGeneration();
     private Player player = new Player();
 
     public Game1()
@@ -26,6 +27,7 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+        worldGeneration.LoadTileSet(Content, GraphicsDevice, "TileSet");
         player.LoadContent(Content);
 
     }
@@ -35,7 +37,7 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-        
+
         player.Update(gameTime);
         base.Update(gameTime);
     }
@@ -46,6 +48,7 @@ public class Game1 : Game
         
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
         
+        worldGeneration.Draw(_spriteBatch);
         player.Draw(_spriteBatch);
         
         _spriteBatch.End();

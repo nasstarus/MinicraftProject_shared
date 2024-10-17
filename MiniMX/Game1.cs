@@ -14,6 +14,7 @@ public class Game1 : Game
     private WorldGeneration worldGeneration = new WorldGeneration();
     private Player player = new Player();
     private Camera camera;
+    private MainUI mainUI = new MainUI();
 
     public Game1()
     {
@@ -24,8 +25,6 @@ public class Game1 : Game
     
     protected override void Initialize()
     {
-        
-
         _graphics.PreferredBackBufferHeight = 1080; //Initialize _graphics
         _graphics.PreferredBackBufferWidth = 1920;
         _graphics.IsFullScreen = true;
@@ -34,6 +33,7 @@ public class Game1 : Game
         _viewport = GraphicsDevice.Viewport;
         
         camera = new Camera(_viewport); // initialize camera to player position
+        mainUI.Initialize(_viewport);
         
         base.Initialize();
     }
@@ -44,6 +44,7 @@ public class Game1 : Game
         
         worldGeneration.LoadTileSet(Content, GraphicsDevice, "TileSet");
         player.LoadContent(Content);
+        mainUI.LoadContent(Content);
     }
 
     protected override void Update(GameTime gameTime)
@@ -65,11 +66,20 @@ public class Game1 : Game
         
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.GetTransformationMatrix());
         
+        
         worldGeneration.Draw(_spriteBatch);
         player.Draw(_spriteBatch, _graphics);
         
+        
         _spriteBatch.End();
         
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        
+        
+        mainUI.Draw(_spriteBatch);
+        
+        
+        _spriteBatch.End();
 
         base.Draw(gameTime);
     }

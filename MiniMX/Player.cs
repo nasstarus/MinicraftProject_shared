@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,8 +10,12 @@ public class Player : Sprite
     public int scale = 10;
     public int speed = 5;
     public float rotation = 0;
-    public Texture2D texture;
     public Vector2 position = Vector2.Zero;
+
+    public Vector2 centerPosition
+    {
+        get => new Vector2(position.X + texture.Width*scale / 2, position.Y + texture.Height*scale / 2);
+    }
     public Vector2 trueSize
     {
         get { return new Vector2(texture.Width*scale, texture.Height*scale); }
@@ -60,7 +63,7 @@ public class Player : Sprite
     public void Draw(SpriteBatch _spriteBatch, GraphicsDeviceManager graphicsDevice)
     {
         _spriteBatch.Draw(texture,
-            new Vector2(graphicsDevice.PreferredBackBufferWidth / 2 - trueSize.X / 2, graphicsDevice.PreferredBackBufferHeight / 2 - trueSize.Y / 2) , 
+            position, 
             null,
             Color.White,
             rotation,

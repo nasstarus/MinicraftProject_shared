@@ -8,12 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fbdc3dd2-a0c2-48f6-aa51-22d8903383f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MiniMX/Camera.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MiniMX/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MiniMX/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MiniMX/Camera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MiniMX/Camera.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MiniMX/Game1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MiniMX/Game1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MiniMX/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MiniMX/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MiniMX/Sprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MiniMX/Sprite.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MiniMX/WorldGeneration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MiniMX/WorldGeneration.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,12 +30,12 @@
     &quot;assignee&quot;: &quot;WaizWarden&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/nasstarus/MinicraftProject_shared.git&quot;,
-    &quot;accountId&quot;: &quot;e81533e2-f51e-4cfb-b24b-644837982853&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/nasstarus/MinicraftProject_shared.git",
+    "accountId": "7a8ca1a2-ef74-4820-b681-3f839a425e28"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
@@ -105,6 +103,7 @@
       <workItem from="1728973695053" duration="470000" />
       <workItem from="1729006247122" duration="3913000" />
       <workItem from="1729096708473" duration="219000" />
+      <workItem from="1729149008769" duration="5316000" />
     </task>
     <servers />
   </component>

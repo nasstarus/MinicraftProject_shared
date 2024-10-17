@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,6 +9,7 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private Viewport _viewport;
     
     private WorldGeneration worldGeneration = new WorldGeneration();
     private Player player = new Player();
@@ -20,23 +22,18 @@ public class Game1 : Game
         IsMouseVisible = true;
     }
     
-    //TODO: delete after test
-    private Texture2D texture;
     protected override void Initialize()
     {
-        camera = new Camera(Vector2.Zero); // initialize camera to player position
+        
 
-        texture = new Texture2D(GraphicsDevice, 50, 50);
-        Color[] colorData = new Color[50 * 50];
-        for (int i = 0; i < colorData.Length; i++)
-        {
-            colorData[i] = Color.White;
-        }
-        texture.SetData(colorData);
-        for (int i = 0; i < 10; i++)
-        {
-            camera.sprites.Add(new Sprite(texture, new Vector2(i*50, i*50)));
-        }
+        _graphics.PreferredBackBufferHeight = 1080; //Initialize _graphics
+        _graphics.PreferredBackBufferWidth = 1920;
+        _graphics.IsFullScreen = true;
+        _graphics.ApplyChanges();
+        
+        _viewport = GraphicsDevice.Viewport;
+        
+        camera = new Camera(_viewport); // initialize camera to player position
         
         base.Initialize();
     }
@@ -54,9 +51,11 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-
+        
         player.Update(gameTime);
-        camera.position = player.position;
+        
+        camera.Position = player.centerPosition;
+        
         base.Update(gameTime);
     }
 
@@ -64,13 +63,13 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.DarkSlateGray);
         
-        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.GetTransformationMatrix());
         
         worldGeneration.Draw(_spriteBatch);
         player.Draw(_spriteBatch, _graphics);
-        camera.Draw(_spriteBatch);
         
         _spriteBatch.End();
+        
 
         base.Draw(gameTime);
     }

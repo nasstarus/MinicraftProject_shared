@@ -33,4 +33,9 @@ public static class Utils
 
         return sprites;
     }
+
+    public static void Log(SpriteFont font, SpriteBatch _spriteBatch, string text)
+    {
+        _spriteBatch.DrawString(font, text, new Vector2(250, 1000), Color.MediumVioletRed);
+    }
 }

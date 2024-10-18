@@ -9,8 +9,6 @@ public class Player : Sprite
 {
     public int scale = 8;
     public int speed = 5;
-    public float rotation = 0;
-    public Vector2 position = Vector2.Zero;
 
     public Vector2 centerPosition
     {

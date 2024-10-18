@@ -15,6 +15,8 @@ public class Game1 : Game
     private Player player = new Player();
     private Camera camera;
     private MainUI mainUI = new MainUI();
+    
+    private SpriteFont font;
 
     public Game1()
     {
@@ -41,10 +43,13 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+        font = Content.Load<SpriteFont>("defaultFont"); //TODO: use when wanna debug (utils class)
         
         worldGeneration.LoadTileSet(Content, GraphicsDevice, "TileSet");
         player.LoadContent(Content);
         mainUI.LoadContent(Content);
+        
     }
 
     protected override void Update(GameTime gameTime)
@@ -56,6 +61,7 @@ public class Game1 : Game
         player.Update(gameTime);
         
         camera.Position = player.centerPosition;
+        mainUI.Update(gameTime);
         
         base.Update(gameTime);
     }
@@ -64,20 +70,18 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.DarkSlateGray);
         
+        //the draw that is affected by camera
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.GetTransformationMatrix());
-        
         
         worldGeneration.Draw(_spriteBatch);
         player.Draw(_spriteBatch, _graphics);
         
-        
         _spriteBatch.End();
         
+        //the draw that is rendered only on screenPos
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
         
-        
         mainUI.Draw(_spriteBatch);
-        
         
         _spriteBatch.End();
 

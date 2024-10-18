@@ -46,7 +46,7 @@ public class Game1 : Game
 
         font = Content.Load<SpriteFont>("defaultFont"); //TODO: use when wanna debug (utils class)
         
-        worldGeneration.LoadTileSet(Content, GraphicsDevice, "TileSet");
+        worldGeneration.LoadTileSet(Content, GraphicsDevice, "Textures/TileSet");
         player.LoadContent(Content);
         mainUI.LoadContent(Content);
         

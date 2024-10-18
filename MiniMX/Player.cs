@@ -22,7 +22,7 @@ public class Player : Sprite
 
     public void LoadContent(ContentManager Content)
     {
-        texture = Content.Load<Texture2D>("player");
+        texture = Content.Load<Texture2D>("Textures/player");
     }
 
     public override void Update(GameTime gameTime)

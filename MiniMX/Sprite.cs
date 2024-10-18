@@ -18,6 +18,7 @@ public class Sprite
     public float layer;
 
     public Rectangle[] sourceRects;
+    public int textureID;
 
     public Sprite(Texture2D? texture = null,
         Vector2? position = null,

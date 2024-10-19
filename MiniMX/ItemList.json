@@ -1,0 +1,42 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Axe",
+      "description": "Kills trees.",
+      "type": "axe",
+      "stackable": false,
+      "isMaterial": false,
+      "spriteSheet": null,
+      "sourceRectangle": null,
+      "stats": {
+        "axePower": 10
+      }
+    },
+    {
+      "id": 2,
+      "name": "Pickaxe",
+      "description": "Kills not trees.",
+      "type": "pickaxe",
+      "stackable": false,
+      "isMaterial": false,
+      "rarity": null,
+      "spriteSheet": null,
+      "sourceRectangle": null,
+      "stats": {
+        "pickaxePower": 10
+      }
+    },
+    {
+      "id": 3,
+      "name": "Pebble",
+      "description": "useless lol",
+      "type": "material",
+      "stackable": true,
+      "isMaterial": true,
+      "rarity": null,
+      "spriteSheet": null,
+      "sourceRectangle": null
+    }
+  ]
+}

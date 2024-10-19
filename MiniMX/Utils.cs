@@ -38,9 +38,4 @@ public static class Utils
     {
         _spriteBatch.DrawString(font, text, new Vector2(250, 1000), Color.MediumVioletRed);
     }
-
-    public static void ImportItemJSON()
-    {
-        
-    }
 }

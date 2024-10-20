@@ -17,6 +17,7 @@ public class MainUI
     readonly int numberOfSlots = 10;
     readonly int sizeOfSlot = 64;
     readonly int sizeOfSelectedSlot = 75;
+    readonly int itemCountNumberOffset = 15;
     private Vector2 firstPosition;
     private Texture2D inventoryTextures;
     private Rectangle[] sourceRects;
@@ -27,15 +28,12 @@ public class MainUI
 
     public static List<Item> itemList = new List<Item>();
     
-    //TODO: countable stackable
-    //TODO: make same items combinable
-    
     public class InventorySlot
     {
         public bool empty = true;
-        public int count;
-
-        private Item? _item; // Backing field for the property
+        
+        private int _count = 0; // Backing fields
+        private Item? _item; 
 
         public Item? item
         {
@@ -44,7 +42,20 @@ public class MainUI
             {
                 _item = value; // Set backing field to the new value
                 empty = (value == null); // Update empty based on value
-                
+            }
+        }
+        public int count
+        {
+            get => _count;
+            set
+            {
+                _count = value;
+                if (_count <= 0)
+                {
+                    this._item = null;
+                    empty = true;
+                    _count = 0;
+                }
             }
         }
     }
@@ -81,6 +92,7 @@ public class MainUI
         inventory[0, 4].item = itemList[0];
         inventory[1, 4].item = itemList[1];
         inventory[5, 2].item = itemList[2];
+        inventory[5, 2].count = 14;
     }
     
     
@@ -90,7 +102,8 @@ public class MainUI
     private int mouseScrollDelta;
     private bool inventoryOpen = false;
     private bool changedInventoryState = false;
-    private bool clicked = false;
+    private bool clickedLeft = false;
+    private bool clickedRight = false;
     private Vector2 mousePosition;
     public void Update(GameTime gameTime)
     {
@@ -142,9 +155,9 @@ public class MainUI
         mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
         
         // select items from inventory and put them back
-        if (Mouse.GetState().LeftButton == ButtonState.Pressed && !clicked) //on click logic here
+        if (Mouse.GetState().LeftButton == ButtonState.Pressed && !clickedLeft) //on click logic here
         {
-            clicked = true;
+            clickedLeft = true;
             if (inventoryOpen &&
                 mousePosition.X.IsBetween(offset, offset + sizeOfSlot * inventory.GetLength(0) - 1) &&
                 mousePosition.Y.IsBetween(offset, offset + sizeOfSlot * inventory.GetLength(1) - 1))
@@ -156,18 +169,51 @@ public class MainUI
                 if (cursorSlot.empty) 
                 {
                     cursorSlot.item = inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item;
+                    cursorSlot.count = inventory[(int)clickedGrid.X, (int)clickedGrid.Y].count;
+                    
                     inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item = null; //empty the slot
+                    inventory[(int)clickedGrid.X, (int)clickedGrid.Y].count = 0;
                 }
                 
                 // if nothing in the inv slot, place the item form cursor slot
-                else if (inventory[(int)clickedGrid.X, (int)clickedGrid.Y].empty)
+                else if (inventory[(int)clickedGrid.X, (int)clickedGrid.Y].empty || 
+                         inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item == cursorSlot.item)
                 {
                     inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item = cursorSlot.item;
+                    inventory[(int)clickedGrid.X, (int)clickedGrid.Y].count += cursorSlot.count;
+                    
                     cursorSlot.item = null;
+                    cursorSlot.count = 0;
                 }
             }
         }
-        else if (Mouse.GetState().LeftButton == ButtonState.Released && clicked) { clicked = false; } //reset value
+        else if (Mouse.GetState().LeftButton == ButtonState.Released && clickedLeft) { clickedLeft = false;} //reset value
+        
+        //drop one item in cursor or take half of the items
+        if (Mouse.GetState().RightButton == ButtonState.Pressed && !clickedRight)
+        {
+            clickedRight = true;
+
+            if (inventoryOpen &&
+                mousePosition.X.IsBetween(offset, offset + sizeOfSlot * inventory.GetLength(0) - 1) &&
+                mousePosition.Y.IsBetween(offset, offset + sizeOfSlot * inventory.GetLength(1) - 1))
+            {
+                Vector2 clickedGrid = new Vector2((mousePosition.X - offset) / sizeOfSlot, 
+                    (mousePosition.Y - offset) / sizeOfSlot);
+                
+                // if item can be put into the slot, put one
+                if(!cursorSlot.empty &&
+                   (inventory[(int)clickedGrid.X, (int)clickedGrid.Y].empty ||
+                    inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item == cursorSlot.item))
+                {
+                    inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item = cursorSlot.item;
+                    inventory[(int)clickedGrid.X, (int)clickedGrid.Y].count += 1;
+
+                    cursorSlot.count -= 1;
+                }
+            }
+        }
+        else if (Mouse.GetState().RightButton == ButtonState.Released && clickedRight) { clickedRight = false; } //reset value
     }
     
     
@@ -207,6 +253,16 @@ public class MainUI
                         sizeOfSlot, sizeOfSlot),
                     inventory[i, 4].item.sourceRectangle,
                     Color.White);
+                
+                //draw the count of the stackable item
+                if (inventory[i,4].item.stackable)
+                {
+                    _spriteBatch.DrawString(Game1.defaultFont,
+                        inventory[i,4].count.ToString(),
+                        new Vector2((int)firstPosition.X + i * sizeOfSlot,
+                            (int)firstPosition.Y) + Vector2.One * itemCountNumberOffset,
+                        Color.White);
+                }
             }
         }
         
@@ -217,6 +273,7 @@ public class MainUI
             {
                 for (int x = 0; x < inventory.GetLength(0); x++)
                 {
+                    //draw the slot
                     _spriteBatch.Draw(
                         inventoryTextures,
                         new Rectangle(offset + sizeOfSlot * x, offset + sizeOfSlot * y, sizeOfSlot, sizeOfSlot),
@@ -224,6 +281,7 @@ public class MainUI
                         Color.White
                         );
 
+                    // draw the item
                     if (!inventory[x, y].empty)
                     {
                         _spriteBatch.Draw(
@@ -231,6 +289,15 @@ public class MainUI
                             new Rectangle(offset + sizeOfSlot * x, offset + sizeOfSlot * y, sizeOfSlot, sizeOfSlot),
                             inventory[x, y].item.sourceRectangle,
                             Color.White);
+                        
+                        // draw the item count
+                        if (inventory[x,y].item.stackable)
+                        {
+                            _spriteBatch.DrawString(Game1.defaultFont,
+                                inventory[x,y].count.ToString(),
+                                new Vector2(offset + sizeOfSlot * x, offset + sizeOfSlot * y) + Vector2.One * itemCountNumberOffset,
+                                Color.White);
+                        }
                     }
                 }
             }
@@ -245,6 +312,13 @@ public class MainUI
                     sizeOfSelectedSlot, sizeOfSelectedSlot),
                 cursorSlot.item.sourceRectangle,
                 Color.White);
+            if (cursorSlot.item.stackable)
+            {
+                _spriteBatch.DrawString(Game1.defaultFont,
+                    cursorSlot.count.ToString(),
+                    mousePosition - new Vector2(sizeOfSelectedSlot) / 2 + Vector2.One * itemCountNumberOffset,
+                    Color.White);
+            }
         }
     }
 

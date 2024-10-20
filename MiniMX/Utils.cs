@@ -34,6 +34,38 @@ public static class Utils
         return sprites;
     }
 
+    public static void DrawSpriteList(SpriteBatch _spriteBatch)
+    {
+        foreach (var sprite in Sprite.spritesToDraw)
+        {
+            if (sprite.rectangle == Rectangle.Empty)
+            {
+                _spriteBatch.Draw(
+                    sprite.texture,
+                    sprite.position, 
+                    sprite.sourceRectangle,
+                    sprite.color,
+                    sprite.rotation,
+                    sprite.origin,
+                    sprite.scale,
+                    sprite.SpriteEffects,
+                    sprite.layer);
+            }
+            else if (sprite.position == Vector2.Zero && sprite.rectangle != Rectangle.Empty)
+            {
+                _spriteBatch.Draw(
+                    sprite.texture,
+                    sprite.rectangle, 
+                    sprite.sourceRectangle,
+                    sprite.color,
+                    sprite.rotation,
+                    sprite.origin,
+                    sprite.SpriteEffects,
+                    sprite.layer);
+            }
+        }
+    }
+
     public static void Log(SpriteFont font, SpriteBatch _spriteBatch, string text)
     {
         _spriteBatch.DrawString(font, text, new Vector2(250, 1000), Color.MediumVioletRed);

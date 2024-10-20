@@ -16,7 +16,7 @@ public class Game1 : Game
     private Camera camera;
     private MainUI mainUI = new MainUI();
     
-    private SpriteFont font;
+    public static SpriteFont defaultFont;
 
     public Game1()
     {
@@ -44,7 +44,7 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        font = Content.Load<SpriteFont>("defaultFont"); //TODO: use when wanna debug (utils class)
+        defaultFont = Content.Load<SpriteFont>("defaultFont"); //TODO: use when wanna debug (utils class)
         
         worldGeneration.LoadTileSet(Content, GraphicsDevice, "Textures/TileSet");
         player.LoadContent(Content);
@@ -70,13 +70,16 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.DarkSlateGray);
         
+        
         //the draw that is affected by camera
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.GetTransformationMatrix());
         
         worldGeneration.Draw(_spriteBatch);
+        Utils.DrawSpriteList(_spriteBatch); // draws the static sprite list of all sprites in game
         player.Draw(_spriteBatch, _graphics);
         
         _spriteBatch.End();
+        
         
         //the draw that is rendered only on screenPos
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);

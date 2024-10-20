@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -7,8 +8,11 @@ namespace MiniMX;
 
 public class Sprite
 {
+    public static List<Sprite> spritesToDraw = new List<Sprite>();
+    
     public Texture2D texture;
     public Vector2 position;
+    public Rectangle rectangle;
     public Rectangle? sourceRectangle;
     public Color color;
     public float rotation;
@@ -22,6 +26,7 @@ public class Sprite
 
     public Sprite(Texture2D? texture = null,
         Vector2? position = null,
+        Rectangle? rectangle = null,
         Rectangle? sourceRectangle = null,
         Color? color = null,
         float rotation = 0f,
@@ -33,10 +38,15 @@ public class Sprite
     {
         this.texture = texture;
         this.position = position ?? Vector2.Zero;
+        this.rectangle = rectangle ?? Rectangle.Empty;
+        this.sourceRectangle = sourceRectangle;
         this.color = color ?? Color.White;
+        this.rotation = rotation;
         this.origin = origin ?? Vector2.Zero;
         this.scale = scale ?? Vector2.One;
-        
+        this.SpriteEffects = spriteEffects;
+        this.layer = layer;
+
     }
     
     public virtual void Update(GameTime gameTime)

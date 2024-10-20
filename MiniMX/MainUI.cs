@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,16 +21,19 @@ public class MainUI
     private Texture2D inventoryTextures;
     private Rectangle[] sourceRects;
     
-    public int selectedSlot = 0;
-    public InventorySlot[,] inventory = new InventorySlot[10,5]; //represents the inventory with hot bar
+    public static int selectedHotbarSlot = 0;
+    public static InventorySlot[,] inventory = new InventorySlot[10,5]; //represents the inventory with hot bar
+    public static InventorySlot cursorSlot = new InventorySlot();
 
-    public List<Item> itemList = new List<Item>();
+    public static List<Item> itemList = new List<Item>();
     
-    //TODO: select items with mouse and put them into other inv slots
+    //TODO: countable stackable
+    //TODO: make same items combinable
     
     public class InventorySlot
     {
         public bool empty = true;
+        public int count;
 
         private Item? _item; // Backing field for the property
 
@@ -40,6 +44,7 @@ public class MainUI
             {
                 _item = value; // Set backing field to the new value
                 empty = (value == null); // Update empty based on value
+                
             }
         }
     }
@@ -85,20 +90,30 @@ public class MainUI
     private int mouseScrollDelta;
     private bool inventoryOpen = false;
     private bool changedInventoryState = false;
+    private bool clicked = false;
+    private Vector2 mousePosition;
     public void Update(GameTime gameTime)
     {
         // set by keys (1, 2, ...)
         keys = Keyboard.GetState().GetPressedKeys();
-        if(keys.Contains(Keys.D1)) {selectedSlot = 0;}
-        else if(keys.Contains(Keys.D2)) {selectedSlot = 1;}
-        else if(keys.Contains(Keys.D3)) {selectedSlot = 2;}
-        else if(keys.Contains(Keys.D4)) {selectedSlot = 3;}
-        else if(keys.Contains(Keys.D5)) {selectedSlot = 4;}
-        else if(keys.Contains(Keys.D6)) {selectedSlot = 5;}
-        else if(keys.Contains(Keys.D7)) {selectedSlot = 6;}
-        else if(keys.Contains(Keys.D8)) {selectedSlot = 7;}
-        else if(keys.Contains(Keys.D9)) {selectedSlot = 8;}
-        else if(keys.Contains(Keys.D0)) {selectedSlot = 9;}
+        if(keys.Contains(Keys.D1)) {selectedHotbarSlot = 0;}
+        else if(keys.Contains(Keys.D2)) {selectedHotbarSlot = 1;}
+        else if(keys.Contains(Keys.D3)) {selectedHotbarSlot = 2;}
+        else if(keys.Contains(Keys.D4)) {selectedHotbarSlot = 3;}
+        else if(keys.Contains(Keys.D5)) {selectedHotbarSlot = 4;}
+        else if(keys.Contains(Keys.D6)) {selectedHotbarSlot = 5;}
+        else if(keys.Contains(Keys.D7)) {selectedHotbarSlot = 6;}
+        else if(keys.Contains(Keys.D8)) {selectedHotbarSlot = 7;}
+        else if(keys.Contains(Keys.D9)) {selectedHotbarSlot = 8;}
+        else if(keys.Contains(Keys.D0)) {selectedHotbarSlot = 9;}
+        
+        //set by scroll Wheel
+        mouseScrollDelta = Mouse.GetState().ScrollWheelValue - lastMousPos;
+        if (mouseScrollDelta != 0)
+        {
+            selectedHotbarSlot = MathHelper.Clamp(selectedHotbarSlot - mouseScrollDelta / 120, 0, numberOfSlots - 1);
+        }
+        lastMousPos = Mouse.GetState().ScrollWheelValue;
 
         // open inventory when I is pressed
         if (keys.Contains(Keys.I))
@@ -123,13 +138,36 @@ public class MainUI
             changedInventoryState = false;
         }
         
-        //set by scroll Wheel
-        mouseScrollDelta = Mouse.GetState().ScrollWheelValue - lastMousPos;
-        if (mouseScrollDelta != 0)
+        //detect mouse position
+        mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+        
+        // select items from inventory and put them back
+        if (Mouse.GetState().LeftButton == ButtonState.Pressed && !clicked) //on click logic here
         {
-            selectedSlot = MathHelper.Clamp(selectedSlot - mouseScrollDelta / 120, 0, numberOfSlots - 1);
+            clicked = true;
+            if (inventoryOpen &&
+                mousePosition.X.IsBetween(offset, offset + sizeOfSlot * inventory.GetLength(0) - 1) &&
+                mousePosition.Y.IsBetween(offset, offset + sizeOfSlot * inventory.GetLength(1) - 1))
+            {
+                Vector2 clickedGrid = new Vector2((mousePosition.X - offset) / sizeOfSlot, 
+                   (mousePosition.Y - offset) / sizeOfSlot);
+
+                //if nothing in cursor slot, take the item
+                if (cursorSlot.empty) 
+                {
+                    cursorSlot.item = inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item;
+                    inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item = null; //empty the slot
+                }
+                
+                // if nothing in the inv slot, place the item form cursor slot
+                else if (inventory[(int)clickedGrid.X, (int)clickedGrid.Y].empty)
+                {
+                    inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item = cursorSlot.item;
+                    cursorSlot.item = null;
+                }
+            }
         }
-        lastMousPos = Mouse.GetState().ScrollWheelValue;
+        else if (Mouse.GetState().LeftButton == ButtonState.Released && clicked) { clicked = false; } //reset value
     }
     
     
@@ -139,7 +177,7 @@ public class MainUI
         // Draw the hotbar horizontaly with the selected bar being highlighted
         for (int i = 0; i < numberOfSlots; i++)
         {
-            if (i == selectedSlot) 
+            if (i == selectedHotbarSlot) 
             {
                 _spriteBatch.Draw(
                     inventoryTextures,
@@ -196,6 +234,17 @@ public class MainUI
                     }
                 }
             }
+        }
+        
+        // draw the item in cursor slot
+        if (!cursorSlot.empty)
+        {
+            _spriteBatch.Draw(cursorSlot.item.spriteSheet,
+                new Rectangle((int)mousePosition.X - (sizeOfSelectedSlot/2),
+                    (int)mousePosition.Y - (sizeOfSelectedSlot/2),
+                    sizeOfSelectedSlot, sizeOfSelectedSlot),
+                cursorSlot.item.sourceRectangle,
+                Color.White);
         }
     }
 

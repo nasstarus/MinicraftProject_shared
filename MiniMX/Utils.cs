@@ -38,4 +38,13 @@ public static class Utils
     {
         _spriteBatch.DrawString(font, text, new Vector2(250, 1000), Color.MediumVioletRed);
     }
+    
+    public static bool IsBetween(this int value, int minValue, int maxValue) //for int
+    {
+        return (value >= minValue && value <= maxValue);
+    }
+    public static bool IsBetween(this float value, float minValue, float maxValue) // for float
+    {
+        return (value >= minValue && value <= maxValue);
+    }
 }

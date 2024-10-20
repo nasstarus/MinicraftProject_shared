@@ -7,7 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbdc3dd2-a0c2-48f6-aa51-22d8903383f4" name="Changes" comment="" />
+    <list default="true" id="fbdc3dd2-a0c2-48f6-aa51-22d8903383f4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MiniMX/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MiniMX/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MiniMX/MainUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MiniMX/MainUI.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,14 +31,10 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/nasstarus/MinicraftProject_shared.git&quot;,
-    &quot;accountId&quot;: &quot;7a8ca1a2-ef74-4820-b681-3f839a425e28&quot;
+    &quot;accountId&quot;: &quot;6616467f-4e84-4a8c-acbb-64693a8bb531&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49bab08708434a08802510b75a8ea3691b3400/70/fa03dedb/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -45,6 +44,7 @@
 }</component>
   <component name="ProjectId" id="2nSk6S3rmYdbUIhlUBJPVEJHdYy" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -58,20 +58,14 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\stepan\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\stepan\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\stepan\\AppData\\Local\\Symbols\\src&quot;
-    ]
   }
 }</component>
   <component name="RunManager">
@@ -106,6 +100,8 @@
       <workItem from="1729006247122" duration="3913000" />
       <workItem from="1729096708473" duration="219000" />
       <workItem from="1729149008769" duration="5316000" />
+      <workItem from="1729344678859" duration="12694000" />
+      <workItem from="1729360452161" duration="134000" />
     </task>
     <task id="LOCAL-00001" summary="New and better hotbar with selecting, without id">
       <option name="closed" value="true" />
@@ -115,7 +111,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729181965688</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Inventory almost done. Added opening inventory, ItemList.json, draw for items.">
+      <option name="closed" value="true" />
+      <created>1729360231550</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1729360231550</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +131,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="New and better hotbar with selecting, without id" />
-    <option name="LAST_COMMIT_MESSAGE" value="New and better hotbar with selecting, without id" />
+    <MESSAGE value="Inventory almost done. Added opening inventory, ItemList.json, draw for items." />
+    <option name="LAST_COMMIT_MESSAGE" value="Inventory almost done. Added opening inventory, ItemList.json, draw for items." />
   </component>
 </project>

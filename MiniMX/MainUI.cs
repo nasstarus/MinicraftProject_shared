@@ -50,11 +50,12 @@ public class MainUI
             set
             {
                 _count = value;
-                if (_count <= 0)
+                if (_count <= 0 && _item != null && _item.stackable)
                 {
                     this._item = null;
                     empty = true;
                     _count = 0;
+                    
                 }
             }
         }
@@ -90,6 +91,7 @@ public class MainUI
         
         //TODO: delete
         inventory[0, 4].item = itemList[0];
+        inventory[0, 3].item = itemList[0];
         inventory[1, 4].item = itemList[1];
         inventory[5, 2].item = itemList[2];
         inventory[5, 2].count = 14;
@@ -176,14 +178,26 @@ public class MainUI
                 }
                 
                 // if nothing in the inv slot, place the item form cursor slot
-                else if (inventory[(int)clickedGrid.X, (int)clickedGrid.Y].empty || 
-                         inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item == cursorSlot.item)
+                else if (inventory[(int)clickedGrid.X, (int)clickedGrid.Y].empty)
                 {
                     inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item = cursorSlot.item;
-                    inventory[(int)clickedGrid.X, (int)clickedGrid.Y].count += cursorSlot.count;
+                    inventory[(int)clickedGrid.X, (int)clickedGrid.Y].count = cursorSlot.count;
                     
                     cursorSlot.item = null;
                     cursorSlot.count = 0;
+                }
+                
+                // if there is item in both slots. Combine if stackable, else put 
+                else if (inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item == cursorSlot.item)
+                {
+                    if (cursorSlot.item is { stackable: true })
+                    {
+                        inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item = cursorSlot.item;
+                        inventory[(int)clickedGrid.X, (int)clickedGrid.Y].count += cursorSlot.count;
+                        
+                        cursorSlot.item = null;
+                        cursorSlot.count = 0;
+                    }
                 }
             }
         }
@@ -202,7 +216,7 @@ public class MainUI
                     (mousePosition.Y - offset) / sizeOfSlot);
                 
                 // if item can be put into the slot, put one
-                if(!cursorSlot.empty &&
+                if(!cursorSlot.empty && cursorSlot.item.stackable && 
                    (inventory[(int)clickedGrid.X, (int)clickedGrid.Y].empty ||
                     inventory[(int)clickedGrid.X, (int)clickedGrid.Y].item == cursorSlot.item))
                 {

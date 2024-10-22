@@ -8,13 +8,13 @@ namespace MiniMX;
 public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
+    public static SpriteBatch _spriteBatch;
     private Viewport _viewport;
     
     private WorldGeneration worldGeneration = new WorldGeneration();
     private Player player = new Player();
     private Camera camera;
-    private MainUI mainUI = new MainUI();
+    private Inventory inventory = new Inventory();
     
     public static SpriteFont defaultFont;
 
@@ -35,7 +35,7 @@ public class Game1 : Game
         _viewport = GraphicsDevice.Viewport;
         
         camera = new Camera(_viewport); // initialize camera to player position
-        mainUI.Initialize(_viewport);
+        inventory.Initialize(_viewport);
         
         base.Initialize();
     }
@@ -44,12 +44,19 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        defaultFont = Content.Load<SpriteFont>("defaultFont"); //TODO: use when wanna debug (utils class)
+        defaultFont = Content.Load<SpriteFont>("defaultFont");
+        GroundItem.underglow = Content.Load<Texture2D>("Textures/Underglow");
         
         worldGeneration.LoadTileSet(Content, GraphicsDevice, "Textures/TileSet");
         player.LoadContent(Content);
-        mainUI.LoadContent(Content);
+        inventory.LoadContent(Content);
         
+        
+        //todo: delete after testiong
+        for (int i = 0; i < 3; i++)
+        {
+            Sprite.itemsOnGround.Add(new GroundItem(Inventory.itemList[i], new Vector2(100 * i , 200), 5));
+        }
     }
 
     protected override void Update(GameTime gameTime)
@@ -61,7 +68,12 @@ public class Game1 : Game
         player.Update(gameTime);
         
         camera.Position = player.centerPosition;
-        mainUI.Update(gameTime);
+        inventory.Update(gameTime);
+        foreach (var item in Sprite.itemsOnGround)
+        {
+            item.Update(gameTime);
+        }
+        GroundItem.DeleteItemsToRemove(); //must be called after updating items on ground
         
         base.Update(gameTime);
     }
@@ -76,6 +88,10 @@ public class Game1 : Game
         
         worldGeneration.Draw(_spriteBatch);
         Utils.DrawSpriteList(_spriteBatch); // draws the static sprite list of all sprites in game
+        foreach (var item in Sprite.itemsOnGround) //draw all the dropped items
+        {
+            item.Draw(_spriteBatch);
+        }
         player.Draw(_spriteBatch, _graphics);
         
         _spriteBatch.End();
@@ -84,7 +100,7 @@ public class Game1 : Game
         //the draw that is rendered only on screenPos
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
         
-        mainUI.Draw(_spriteBatch);
+        inventory.Draw(_spriteBatch);
         
         _spriteBatch.End();
 

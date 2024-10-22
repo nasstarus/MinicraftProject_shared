@@ -8,7 +8,8 @@ namespace MiniMX;
 
 public class Sprite
 {
-    public static List<Sprite> spritesToDraw = new List<Sprite>();
+    public static List<Sprite> spritesToDraw = new List<Sprite>(); //draw all the not moving sprites here
+    public static List<GroundItem> itemsOnGround = new List<GroundItem>(); // for the sprites on ground
     
     public Texture2D texture;
     public Vector2 position;

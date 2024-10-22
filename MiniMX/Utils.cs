@@ -34,6 +34,10 @@ public static class Utils
         return sprites;
     }
 
+    /// <summary>
+    /// Draws the static List spritesToDraw defined in Sprite class, use only for not moving sprites
+    /// </summary>
+    /// <param name="_spriteBatch">SpriteBatch used in Game1</param>
     public static void DrawSpriteList(SpriteBatch _spriteBatch)
     {
         foreach (var sprite in Sprite.spritesToDraw)
@@ -66,9 +70,12 @@ public static class Utils
         }
     }
 
-    public static void Log(SpriteFont font, SpriteBatch _spriteBatch, string text)
+    /// <summary>
+    /// For debugging in game, usable only after content loaded in Game1
+    /// </summary>
+    public static void Log(SpriteBatch _spriteBatch,string text)
     {
-        _spriteBatch.DrawString(font, text, new Vector2(250, 1000), Color.MediumVioletRed);
+        _spriteBatch.DrawString(Game1.defaultFont, text, new Vector2(250, 1000), Color.MediumVioletRed);
     }
     
     public static bool IsBetween(this int value, int minValue, int maxValue) //for int

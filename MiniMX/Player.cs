@@ -5,10 +5,12 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MiniMX;
 
-public class Player : Sprite
+public class Player : Sprite //there can be only one player !!!!!!!!!
 {
-    public int scale = 8;
-    public int speed = 5;
+    public static int scale = 8;
+    public static int speed = 5;
+    public static Vector2 position = Vector2.Zero;
+    public static float pickupDistance = 64;
 
     public Vector2 centerPosition
     {

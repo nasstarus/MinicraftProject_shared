@@ -11,7 +11,7 @@ using System.Text.Json;
 
 namespace MiniMX;
 
-public class MainUI
+public class Inventory
 {
     readonly int offset = 16;
     readonly int numberOfSlots = 10;
@@ -61,7 +61,7 @@ public class MainUI
         }
     }
     
-    public MainUI()
+    public Inventory()
     {
         // Initialize InventorySlots in the constructor
         for (int i = 0; i < inventory.GetLength(0); i++)

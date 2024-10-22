@@ -35,8 +35,8 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49bab08708434a08802510b75a8ea3691b3400/70/fa03dedb/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49bab08708434a08802510b75a8ea3691b3400/91/fef44931/SpriteBatch.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
   <component name="ProjectColorInfo">{
@@ -51,23 +51,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Project.MiniMX.executor": "Run",
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.smartKeys_rider",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Project.MiniMX.executor&quot;: &quot;Run&quot;,
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="MiniMX" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -102,8 +102,6 @@
       <workItem from="1729149008769" duration="5316000" />
       <workItem from="1729344678859" duration="12694000" />
       <workItem from="1729360452161" duration="134000" />
-      <workItem from="1729408901410" duration="10792000" />
-      <workItem from="1729586860709" duration="1561000" />
     </task>
     <task id="LOCAL-00001" summary="New and better hotbar with selecting, without id">
       <option name="closed" value="true" />
@@ -121,31 +119,7 @@
       <option name="project" value="LOCAL" />
       <updated>1729360231550</updated>
     </task>
-    <task id="LOCAL-00003" summary="Made movable items in inventory, static InBetween function for ints and floats, kiss my dick.">
-      <option name="closed" value="true" />
-      <created>1729412211733</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1729412211733</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Made movable items in inventory, static InBetween function for ints and floats, kiss my dick.">
-      <option name="closed" value="true" />
-      <created>1729412348608</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1729412348608</updated>
-    </task>
-    <task id="LOCAL-00005" summary="drop one item in inventory with right click, combining items works">
-      <option name="closed" value="true" />
-      <created>1729424849696</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1729424849696</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,8 +132,6 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="New and better hotbar with selecting, without id" />
     <MESSAGE value="Inventory almost done. Added opening inventory, ItemList.json, draw for items." />
-    <MESSAGE value="Made movable items in inventory, static InBetween function for ints and floats, kiss my dick." />
-    <MESSAGE value="drop one item in inventory with right click, combining items works" />
-    <option name="LAST_COMMIT_MESSAGE" value="drop one item in inventory with right click, combining items works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inventory almost done. Added opening inventory, ItemList.json, draw for items." />
   </component>
 </project>

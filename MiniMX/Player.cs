@@ -12,9 +12,9 @@ public class Player : Sprite //there can be only one player !!!!!!!!!
     public static Vector2 position = Vector2.Zero;
     public static float pickupDistance = 64;
 
-    public Vector2 centerPosition
+public static Vector2 centerPosition
     {
-        get => new Vector2(position.X + texture.Width*scale / 2, position.Y + texture.Height*scale / 2);
+        get => new Vector2(position.X + 32, position.Y + 32);
     }
     public Vector2 trueSize
     {

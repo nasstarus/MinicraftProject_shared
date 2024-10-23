@@ -8,11 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fbdc3dd2-a0c2-48f6-aa51-22d8903383f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MiniMX/GroundItem.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MiniMX/Data/tilemap.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MiniMX/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MiniMX/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MiniMX/Game1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MiniMX/Game1.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MiniMX/Sprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MiniMX/Sprite.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MiniMX/Utils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MiniMX/Utils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MiniMX/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MiniMX/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MiniMX/WorldGeneration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MiniMX/WorldGeneration.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,15 +31,14 @@
     &quot;assignee&quot;: &quot;WaizWarden&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/nasstarus/MinicraftProject_shared.git",
-    "accountId": "f07f1134-3921-4647-99a5-e9f504e444ec"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/nasstarus/MinicraftProject_shared.git&quot;,
+    &quot;accountId&quot;: &quot;e81533e2-f51e-4cfb-b24b-644837982853&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49bab08708434a08802510b75a8ea3691b3400/70/fa03dedb/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/ljuri/RiderProjects/MiniMX/MiniMX/WorldGeneration.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
   <component name="ProjectColorInfo">{
@@ -54,23 +53,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Project.MiniMX.executor": "Run",
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Project.MiniMX.executor&quot;: &quot;Run&quot;,
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="MiniMX" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -105,6 +104,7 @@
       <workItem from="1729149008769" duration="5316000" />
       <workItem from="1729344678859" duration="12694000" />
       <workItem from="1729360452161" duration="134000" />
+      <workItem from="1729533950014" duration="4862000" />
     </task>
     <task id="LOCAL-00001" summary="New and better hotbar with selecting, without id">
       <option name="closed" value="true" />
@@ -122,15 +122,7 @@
       <option name="project" value="LOCAL" />
       <updated>1729360231550</updated>
     </task>
-    <task id="LOCAL-00003" summary="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/.idea.MiniMX/.idea/workspace.xml">
-      <option name="closed" value="true" />
-      <created>1729588711935</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1729588711935</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,23 +130,11 @@
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="New and better hotbar with selecting, without id" />
     <MESSAGE value="Inventory almost done. Added opening inventory, ItemList.json, draw for items." />
-    <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/.idea.MiniMX/.idea/workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/.idea.MiniMX/.idea/workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inventory almost done. Added opening inventory, ItemList.json, draw for items." />
   </component>
 </project>
